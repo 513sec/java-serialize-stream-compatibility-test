@@ -1,0 +1,9 @@
+version: '2'
+services:
+ java:
+   image: vulhub/java:{version}
+   volumes:
+     - .:/test
+   command: /bin/sh -c "cd /test &&
+     java DeserializeObject {file} &&
+     if [ ! -e /tmp/{file} ]; then exit 1; fi"

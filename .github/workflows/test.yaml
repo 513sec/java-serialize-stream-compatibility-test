@@ -1,0 +1,110 @@
+name: test
+on: push
+
+jobs:
+  jdk7u21:
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [
+          "6u4-jdk",
+          "6u5-jdk",
+          "6u6-jdk",
+          "6u7-jdk",
+          "6u10-jdk",
+          "6u11-jdk",
+          "6u12-jdk",
+          "6u13-jdk",
+          "6u14-jdk",
+          "6u15-jdk",
+          "6u16-jdk",
+          "6u17-jdk",
+          "6u18-jdk",
+          "6u19-jdk",
+          "6u20-jdk",
+          "6u21-jdk",
+          "6u22-jdk",
+          "6u23-jdk",
+          "6u24-jdk",
+          "6u25-jdk",
+          "6u26-jdk",
+          "6u27-jdk",
+          "6u29-jdk",
+          "6u30-jdk",
+          "6u31-jdk",
+          "6u32-jdk",
+          "6u33-jdk",
+          "6u34-jdk",
+          "6u35-jdk",
+          "6u37-jdk",
+          "6u38-jdk",
+          "6u39-jdk",
+          "6u41-jdk",
+          "6u43-jdk",
+          "6u45-jdk",
+
+          "7u0-jdk",
+          "7u1-jdk",
+          "7u2-jdk",
+          "7u3-jdk",
+          "7u4-jdk",
+          "7u5-jdk",
+          "7u6-jdk",
+          "7u7-jdk",
+          "7u9-jdk",
+          "7u10-jdk",
+          "7u11-jdk",
+          "7u13-jdk",
+          "7u15-jdk",
+          "7u17-jdk",
+          "7u21-jdk",
+          # < 7u25-b03(2013-06-18)
+        ]
+    name: 7u21 ${{ matrix.version }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          sed -i 's/{version}/${{ matrix.version }}/' docker-compose.yml
+          sed -i 's/{file}/7u21/' docker-compose.yml
+          docker-compose up --exit-code-from java
+
+  jdk8u20:
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [
+          # >= 7u25-b03(2013-06-18)
+          "7u25-jdk",
+          "7u40-jdk",
+          "7u45-jdk",
+          "7u51-jdk",
+          "7u55-jdk",
+          "7u60-jdk",
+          "7u65-jdk",
+          "7u67-jdk",
+          "7u71-jdk",
+          "7u72-jdk",
+          "7u75-jdk",
+          "7u76-jdk",
+          "7u79-jdk",
+          "7u80-jdk",
+
+          "8u0-jdk",
+          "8u5-jdk",
+          "8u11-jdk",
+          "8u20-jdk",
+          "8u25-jdk",
+          "8u51-jdk",
+          "8u65-jdk",
+          "8u71-jdk",
+          # < 8u72-b12(2015-12-08)
+        ]
+    name: 8u20 ${{ matrix.version }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          sed -i 's/{version}/${{ matrix.version }}/' docker-compose.yml
+          sed -i 's/{file}/8u20/' docker-compose.yml
+          docker-compose up --exit-code-from java
